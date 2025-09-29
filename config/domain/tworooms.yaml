@@ -1,0 +1,28 @@
+domain:
+  _target_: domains.tworooms
+  reward: sparse-trap  # dense-goal, sparse-goal, sparse-trap, sparse-sweettrap
+
+exp:
+  each_query: 1
+  warmup_sample: 0.
+
+  softmax_af: False
+  af_thre: 0
+
+  qiterations: 10
+  qalpha: 0.05
+
+  decay: 'linear'  # concave, convex, linear
+  fixeddecay: True
+  fixtime: 0.5
+  decay_temp: 6.
+  packbits: False
+
+  algo: infl  # guided, visit, uniform
+  impute: zero  # zero, mean, max, min, gt, none
+
+  qfunction:
+    _target_: models.qtable
+
+  il:
+    _target_: models.il

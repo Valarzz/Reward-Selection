@@ -1,0 +1,38 @@
+defaults:
+  - ../minatar
+
+domain:
+  _target_: minatar.Environment
+  game: asterix
+
+exp:
+  algo: guided  # guided, visit, uniform
+
+  # ES specific parameters
+  M: 100
+  K: 10
+  E: 10
+  learning_rate: 3e-4
+  alpha: 0.005
+  tau: 0.7
+  beta: 3.0
+  discount: 0.99
+
+  # Training parameters
+  train_steps: 125000
+  batch_size: 256
+  eval_period: 500
+  n_eval_episodes: 50
+
+  # MinAtar specific parameters
+  budget: 10000
+  each_query: 250
+  blind: 0
+  uniform: 0
+  decay: concave
+  fixeddecay: 0
+  fixtime: 0.5
+  zero: vis
+  uil: 1
+  decay_temp: 6.0
+  initial_sample: 250 

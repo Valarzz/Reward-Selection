@@ -1,0 +1,40 @@
+defaults:
+  - _self_
+  - domain: graph  # graph, tree, tworooms, cliffwalk, frozenlake, minatar/breakout, minatar/freeway, minatar/seaquest, minatar/asterix 
+  - selection: training_phase # heuristics, training_phase, eval
+
+selection_params:
+  visit_ids: '1_2_3'
+  hashed_id: '1_2_3'
+  eval_episodes: 10000  # 10_000, 50
+  gamma: 0.99
+  search: greedy  # greedy, beam, evolutionary
+  beam_size: 5
+  evo_num: 10
+  evo_iter: 10
+  evo_estimate: argmax  # argmax, sample
+  tt: False  # True, False
+  train: [0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1]
+  test: [0.55, 0.53, 0.51, 0.48, 0.45]
+
+dataset:
+  data_collecting: 'good'  # 'good', 'mid', 'bad'
+  dataset_size: 100_000  # 100_000, 1_000_000
+  dataset_seed: 1
+  dc_ratio: null  # null, 0.8
+
+general:
+  seed: 0
+  budget: null
+  expname: 'test'
+  parallel_num: 1
+  save_result: True
+  qinit: 'zero'  # 'zero', 'random', 'ucb_max', 'ucb_min'
+  
+  
+root: 
+
+
+hydra:
+  run:
+    dir: .

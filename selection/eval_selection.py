@@ -1,3 +1,9 @@
+"""
+Evaluation phase that tests the best state selections from training_phase on multiple test ratios.
+Loads saved training_phase results, submits jobs to evaluate them on different dataset ratios,
+and aggregates performance across test conditions.
+"""
+
 import os
 import numpy as np
 import hashlib

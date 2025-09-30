@@ -1,3 +1,10 @@
+"""
+Training phase that searches for optimal state selections using different search strategies:
+- greedy: incrementally add one state at a time
+- ES: use ES to optimize state selection distribution
+Saves best state selections at each budget level for later evaluation.
+"""
+
 import numpy as np
 import torch
 from tqdm import tqdm, trange

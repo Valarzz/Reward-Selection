@@ -1,3 +1,9 @@
+"""
+Direct selection method that trains IQL on a specific set of state IDs.
+Takes pre-specified visit_ids (provided via config), trains on those states,
+and saves results. Used for evaluating specific state selections.
+"""
+
 import os
 import numpy as np
 import hashlib

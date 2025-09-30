@@ -1,3 +1,11 @@
+"""
+Heuristics-based state selection methods including:
+- uniform: random sampling
+- visitation: sample by state visitation frequency
+- guided: adaptive method combining visitation heuristics with acquisition functions
+Iteratively selects states, trains IQL/offline Q-learning, and evaluates performance.
+"""
+
 import numpy as np
 import torch
 from tqdm import tqdm, trange

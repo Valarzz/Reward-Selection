@@ -1,3 +1,11 @@
+"""
+Base class for all selection methods in offline RL.
+Initializes environment, dataset, Q-function, and provides core utilities for:
+- Training IQL/offline Q-learning agents on selected states
+- Computing discounted state occupancy measures
+- Evaluating policies
+"""
+
 import numpy as np
 import json
 import ast

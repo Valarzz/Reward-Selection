@@ -1,0 +1,5 @@
+_target_: selection.ams
+visitation_source: behavior   # behavior, on_policy
+explore_mode: inv_freq        # inv_freq, uniform
+inverse_visitation_eps: 1.0e-6
+exp_scale: 0.5

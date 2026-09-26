@@ -1,7 +1,7 @@
 defaults:
   - _self_
   - domain: graph  # graph, tree, tworooms, cliffwalk, frozenlake, minatar/breakout, minatar/freeway, minatar/seaquest, minatar/asterix 
-  - selection: training_phase # heuristics, training_phase, eval
+  - selection: training_phase # heuristics, training_phase, adaptive_mixture, eval
 
 selection_params:
   visit_ids: '1_2_3'

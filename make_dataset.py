@@ -25,7 +25,7 @@ def main(hydra_cfg):
     yaml_config = OmegaConf.to_yaml(hydra_cfg, resolve=True)
     args = EasyDict(yaml.safe_load(yaml_config))
 
-    if args.domain.domain.game in ['breakout', 'freeway', 'seaquest', 'asterix']:
+    if args.domain.domain.get('game') in ['breakout', 'freeway', 'seaquest', 'asterix']:
         make_minatar_dataset(args)
         return
 

@@ -1,8 +1,8 @@
-# Which Rewards Matter? Reward Selection for Reinforcement Learning from Limited Feedback
+# Data Selection for Reward Labeling in Limited-Feedback Reinforcement Learning
 
-Source code for [Which Rewards Matter? Reward Selection for Reinforcement Learning from Limited Feedback](https://arxiv.org/abs/2510.00144)
+Source code for [Data Selection for Reward Labeling in Limited-Feedback Reinforcement Learning](https://arxiv.org/abs/2510.00144)
 
-> The ability of reinforcement learning algorithms to learn effective policies is determined by the rewards available during training. However, for practical problems, obtaining large quantities of reward labels is often infeasible due to computational or financial constraints, particularly when relying on human feedback. When reinforcement learning must proceed with limited feedback---only a fraction of samples get rewards labeled---a fundamental question arises: which samples should be labeled to maximize policy performance? We formalize this problem of reward selection for reinforcement learning from limited feedback (RLLF), introducing a new problem formulation that facilitates the study of strategies for selecting impactful rewards. Two types of selection strategies are investigated: (i) heuristics that rely on reward-free information such as state visitation and partial value functions, and (ii) strategies pre-trained using auxiliary evaluative feedback. We find that critical subsets of rewards are those that (1) guide the agent along optimal trajectories, and (2) support recovery toward near-optimal behavior after deviations. Effective selection methods yield near-optimal policies with significantly fewer reward labels than full supervision, establishing reward selection as a powerful paradigm for scaling reinforcement learning in feedback-limited settings.
+> The ability of reinforcement learning (RL) algorithms to learn effective policies is determined by the rewards available during training. However, for practical problems, obtaining large quantities of reward labels is often infeasible due to computational or financial constraints. When reinforcement learning must proceed with limited feedback---only a fraction of samples get reward labels---a fundamental question arises: \textit{which} samples should be labeled for RL training to maximize policy performance? We formalize this problem of \textit{reward selection} for reinforcement learning from limited feedback, introducing a new problem formulation that facilitates the study of strategies for selecting impactful rewards. Various types of selection strategies are investigated: (i) ones that rely on reward-free information such as state visitation and partial value functions, (ii) ones that perform near-optimal selection requiring prohibitive costs, and (iii) ones that trade off those costs for some loss in performance. We find that critical subsets of rewards are those that (1) guide the agent along optimal trajectories, and (2) support recovery toward near-optimal behavior after deviations. Effective selection methods yield near-optimal policies with significantly fewer reward labels than full supervision, establishing reward selection as an instrumental paradigm for scaling reinforcement learning in feedback-limited settings.
 
 ## Installation
 
@@ -70,6 +70,9 @@ python main.py domain=graph domain.exp.algo=guided domain.exp.impute=zero
 # Training phase selection strategies
 python main.py domain=graph selection=training_phase selection_params.search=greedy domain.exp.impute=zero
 
+# Adaptive-mixture selection
+python main.py domain=graph selection=adaptive_mixture selection.exp_scale=0.5 selection.explore_mode=inv_freq domain.exp.impute=zero
+
 ```
 
 ## Architecture Overview
@@ -79,6 +82,7 @@ python main.py domain=graph selection=training_phase selection_params.search=gre
 #### 1. Selection Strategies (`selection/`)
 - **Heuristic Selection** (`heuristics_selection.py`): `guided`, `vistation`, and `uniform`
 - **Training Phase Selection** (`training_phase_selection.py`): `brute-force`, `sequential-greedy` and `ES`
+- **Adaptive-Mixture Selection** (`adaptive_mixture_selection.py`): samples each query from `w * p_explore + (1 - w) * p_exploit`, where `p_exploit` is state visitation, `p_explore` is inverse visitation (or uniform), and `w = exp(-|J_true - J_proxy| / exp_scale)` is recomputed after every query (tabular domains, `each_query=1`)
 
 #### 2. Domains (`domains/`)
 **Tabular Domains:**
@@ -157,9 +161,12 @@ exp:
 | Parameter | Options | Description |
 |-----------|---------|-------------|
 | `domain` | `graph`, `tree`, `tworooms`, `cliffwalk`, `frozenlake`, `minatar/breakout`, `minatar/freeway`, `minatar/seaquest`, `minatar/asterix`| Environment |
-| `selection` | `heuristics`, `training_phase` | Selection strategy type |
+| `selection` | `heuristics`, `training_phase`, `adaptive_mixture` | Selection strategy type |
 | `selection_params.search` | `greedy`, `evolutionary` | Training phase selection strategies |
 | `domain.exp.algo` | `uniform`, `visitation`, `guided` | Heuristic selection strategies |
+| `selection.exp_scale` | float (default `0.5`) | Adaptive-mixture gate temperature |
+| `selection.explore_mode` | `inv_freq`, `uniform` | Adaptive-mixture explore distribution |
+| `selection.visitation_source` | `behavior`, `on_policy` | Adaptive-mixture exploit distribution |
 | `domain.exp.impute` | `zero`, `none` | Policy learning from partially reward-labeled data |
 
 

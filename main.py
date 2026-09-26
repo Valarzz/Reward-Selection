@@ -54,7 +54,7 @@ def run_minatar_experiment(args, seed):
 
 def run_experiment(cfg, args, seed):
     # Check if this is a MinAtar domain before any domain imports
-    if args.domain.domain.game in ['breakout', 'freeway', 'seaquest', 'asterix']:
+    if args.domain.domain.get('game') in ['breakout', 'freeway', 'seaquest', 'asterix']:
         run_minatar_experiment(args, seed)
         return
 

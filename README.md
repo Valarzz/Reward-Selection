@@ -4,6 +4,21 @@ Source code for [Data Selection for Reward Labeling in Limited-Feedback Reinforc
 
 > The ability of reinforcement learning (RL) algorithms to learn effective policies is determined by the rewards available during training. However, for practical problems, obtaining large quantities of reward labels is often infeasible due to computational or financial constraints. When reinforcement learning must proceed with limited feedback---only a fraction of samples get reward labels---a fundamental question arises: \textit{which} samples should be labeled for RL training to maximize policy performance? We formalize this problem of \textit{reward selection} for reinforcement learning from limited feedback, introducing a new problem formulation that facilitates the study of strategies for selecting impactful rewards. Various types of selection strategies are investigated: (i) ones that rely on reward-free information such as state visitation and partial value functions, (ii) ones that perform near-optimal selection requiring prohibitive costs, and (iii) ones that trade off those costs for some loss in performance. We find that critical subsets of rewards are those that (1) guide the agent along optimal trajectories, and (2) support recovery toward near-optimal behavior after deviations. Effective selection methods yield near-optimal policies with significantly fewer reward labels than full supervision, establishing reward selection as an instrumental paradigm for scaling reinforcement learning in feedback-limited settings.
 
+### Citation
+
+```
+@article{
+chaudhari2026data,
+title={Data Selection for Reward Labeling in Limited-Feedback Reinforcement Learning},
+author={Shreyas Chaudhari and Renhao Zhang and Philip S. Thomas and Bruno Castro da Silva},
+journal={Transactions on Machine Learning Research},
+issn={2835-8856},
+year={2026},
+url={https://openreview.net/forum?id=N8OlHGeHSy},
+note={}
+}
+```
+
 ## Installation
 
 ### Requirements
